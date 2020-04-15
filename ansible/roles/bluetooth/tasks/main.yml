@@ -52,6 +52,11 @@
 #  become: yes
 #  become_user: "{{ build_user }}"
 
+- name: "check for bluetooth-raspberrypi"
+  command: pacman -Q bluetooth-raspberrypi
+  register: bluetooth_raspberrypi_result
+  ignore_errors: yes
+
 - name: "clone bluetooth-raspberrypi"
   git:
     repo: https://github.com/RoEdAl/alarm-bluetooth-raspberrypi
@@ -59,11 +64,7 @@
     update: no
   become: yes
   become_user: "{{ build_user }}"
-
-- name: "check for bluetooth-raspberrypi"
-  command: pacman -Q bluetooth-raspberrypi
-  register: bluetooth_raspberrypi_result
-  ignore_errors: yes
+  when: bluetooth_raspberrypi_result is failed
 
 - name: "install bluetooth-raspberrypi"
   command:
@@ -80,13 +81,21 @@
     insertbefore: '^gpu_mem='
     line: dtoverlay=bcmbt
 
-- name: "create systemd-udevd service override"
-  copy:
-    src: systemd-udevd.service.d/override.conf
+- name: "create systemd-udevd.service.d"
+  file:
+    state: directory
     dest: /etc/systemd/system
     owner: root
     group: root
     mode: 0755
+
+- name: "create systemd-udevd.service.d"
+  copy:
+    src: systemd-udevd.service.d/override.conf
+    dest: /etc/systemd/system/systemd-udevd.service.d/override.conf
+    owner: root
+    group: root
+    mode: 0644
   register: override_result
 
 - name: "reload systemd"
