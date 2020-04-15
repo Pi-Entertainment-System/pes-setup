@@ -1,0 +1,7 @@
+#
+# ~/.bash_profile
+#
+
+# Ansible managed
+
+[[ -f ~/.bashrc ]] && . ~/.bashrc
