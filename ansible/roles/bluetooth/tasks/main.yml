@@ -96,7 +96,7 @@
     group: root
     mode: 0755
 
-- name: "create systemd-udevd.service.d"
+- name: "create systemd-udevd.service.d/override.conf"
   copy:
     src: systemd-udevd.service.d/override.conf
     dest: /etc/systemd/system/systemd-udevd.service.d/override.conf
