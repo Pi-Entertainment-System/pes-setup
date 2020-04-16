@@ -37,6 +37,13 @@
     insertafter: '^#AutoEnable='
     line: AutoEnable=true
 
+- name: "disable discoverable timeout"
+  lineinfile:
+    path: /etc/bluetooth/main.conf
+    regexp: '^DiscoverableTimeout='
+    insertafter: '^#DiscoverableTimeout='
+    line: DiscoverableTimeout=0
+
 - name: "install bluez-utils-compat"
   aur:
     name: bluez-utils-compat
