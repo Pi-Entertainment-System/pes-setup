@@ -21,28 +21,35 @@
 #
 
 ---
-- name: "performing initial set-up of PES"
-  hosts: localhost
-  vars:
-    build_dir: /home/pi/pes-build
-    build_user: pi
-  connection: local
-  roles:
-    - name: install-packages
-      tags: [ install-packages ]
-    - name: motd
-      tags: [ motd ]
-    - name: user-setup
-      tags: [ user-setup ]
-    - name: customise-os
-      tags: [ customise-os ]
-    - name: systemd-resolved
-      tags: [ systemd-resolved ]
-    - name: timesyncd
-      tags: [ timesyncd ]
-    - name: swap
-      tags: [ swap ]
-    - name: install-ansible-aur
-      tags: [ install-ansible-aur ]
-    - name: bluetooth
-      tags: [ bluetooth ]
+
+- name: "disable systemd-resolved"
+  service:
+    name: systemd-resolved
+    enabled: no
+    state: stopped
+
+- name: "check status of /etc/resolv.conf"
+  stat:
+    path: /etc/resolv.conf
+    follow: no
+  register: resolv_result
+
+- name: "remove /etc/resolv.conf sym link"
+  file:
+    state: absent
+    path: /etc/resolv.conf
+  when: resolv_result.stat.exists and resolv_result.stat.islnk
+
+- name: "get resolvconf output"
+  command: "resolvconf -l"
+  register: resolvconf_result
+  when: not resolv_result.stat.exists or (resolv_result.stat.exists and resolv_result.stat.islnk)
+
+- name: "create /etc/resolv.conf"
+  copy:
+    dest: /etc/resolv.conf
+    content: "{{ resolvconf_result.stdout}}\n"
+    owner: root
+    group: root
+    mode: 0644
+  when: not resolv_result.stat.exists or (resolv_result.stat.exists and resolv_result.stat.islnk)
