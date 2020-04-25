@@ -1,0 +1,6 @@
+[submodule "packages/pkg-pes-sixad"]
+	path = packages/pkg-pes-sixad
+	url = https://github.com/Pi-Entertainment-System/pkg-pes-sixad
+[submodule "packages/pkg-pes-rasum"]
+	path = packages/pkg-pes-rasum
+	url = https://github.com/Pi-Entertainment-System/pkg-pes-rasum
