@@ -4,3 +4,6 @@
 [submodule "packages/pkg-pes-rasum"]
 	path = packages/pkg-pes-rasum
 	url = https://github.com/Pi-Entertainment-System/pkg-pes-rasum
+[submodule "packages/bluez-utils-compat"]
+	path = packages/bluez-utils-compat
+	url = https://aur.archlinux.org/bluez-utils-compat.git
