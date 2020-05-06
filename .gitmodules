@@ -7,3 +7,6 @@
 [submodule "packages/bluez-utils-compat"]
 	path = packages/bluez-utils-compat
 	url = https://aur.archlinux.org/bluez-utils-compat.git
+[submodule "packages/bluetooth-raspberrypi"]
+	path = packages/bluetooth-raspberrypi
+	url = https://github.com/RoEdAl/alarm-bluetooth-raspberrypi
