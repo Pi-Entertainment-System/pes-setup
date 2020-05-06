@@ -39,18 +39,20 @@ repoDir="$DIR/repo"
 
 cd $DIR/packages
 
+# add known GPG public keys
+gpg --recv-key 06CA9F5D1DCF2659 # Marcel Holtmann <marcel@holtmann.org>
+
 for d in *; do
-	pwd	
+	pwd
 	cd $d
 	if [ ! -f PKGBUILD ]; then
-		die "No PKGBUILD file found for $d"	
+		die "No PKGBUILD file found for $d"
 	fi
 	makepkg --sign --key $KEY
-	mv *.xz *.xz.sig $DIR/repo/	
+	mv *.xz *.xz.sig $DIR/repo/
 	cd ..
 done
 
 cd $repoDir
 
 repo-add --sign --key $KEY pes.db.tar.gz *.xz
-
