@@ -54,7 +54,6 @@
       - patch
       - pkg-config
       - rsync
-      - samba
       - scons
       - screen
       - sudo
