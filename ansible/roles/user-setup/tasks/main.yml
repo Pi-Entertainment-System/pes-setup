@@ -52,6 +52,22 @@
     home: /home/pi
     state: present
 
+- name: "create /etc/systemd/system/getty@tty1.service.d"
+  file:
+    path: "/etc/systemd/system/getty@tty1.service.d"
+    state: directory
+    mode: 0755
+    owner: root
+    group: root
+
+- name: "enable auto login for pi user"
+  copy:
+    src: autologin.conf
+    dest: /etc/systemd/system/getty@tty1.service.d/autologin.conf
+    owner: root
+    group: root
+    mode: 0644
+
 - name: "create pes build dir"
   file:
     path: "{{ build_dir }}"
