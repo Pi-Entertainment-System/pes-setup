@@ -22,14 +22,6 @@
 
 ---
 
-#- name: "install bluez-ps3"
-#  aur:
-#    name: bluez-ps3
-#    skip_installed: yes
-#    ignore_arch: yes
-#  become: yes
-#  become_user: "{{ build_user }}"
-
 - name: "auto enable Bluetooth"
   lineinfile:
     path: /etc/bluetooth/main.conf
@@ -44,42 +36,12 @@
     insertafter: '^#DiscoverableTimeout='
     line: DiscoverableTimeout=0
 
-- name: "install bluez-utils-compat"
-  aur:
-    name: bluez-utils-compat
-    skip_installed: yes
-    skip_pgp_check: yes
-  become: yes
-  become_user: "{{ build_user }}"
-
-#- name: "install pi-bluetooth"
-#  aur:
-#    name: pi-bluetooth
-#    skip_installed: yes
-#  become: yes
-#  become_user: "{{ build_user }}"
-
-- name: "check for bluetooth-raspberrypi"
-  command: pacman -Q bluetooth-raspberrypi
-  register: bluetooth_raspberrypi_result
-  ignore_errors: yes
-
-- name: "clone bluetooth-raspberrypi"
-  git:
-    repo: https://github.com/RoEdAl/alarm-bluetooth-raspberrypi
-    dest: "{{ build_dir }}/bluetooth-raspberrypi"
-    update: no
-  become: yes
-  become_user: "{{ build_user }}"
-  when: bluetooth_raspberrypi_result is failed
-
-- name: "install bluetooth-raspberrypi"
-  command:
-    cmd: makepkg -si --noconfirm
-    chdir: "{{ build_dir }}/bluetooth-raspberrypi"
-  become: yes
-  become_user: "{{ build_user }}"
-  when: bluetooth_raspberrypi_result is failed
+- name: "install bluetooth packages"
+  pacman:
+    state: present
+    name:
+      - bluetooth-raspberrypi
+      - bluez-utils-compat
 
 - name: "add Bluetooth dtoverlay to /boot/config.txt"
   lineinfile:
@@ -91,7 +53,7 @@
 - name: "create systemd-udevd.service.d"
   file:
     state: directory
-    dest: /etc/systemd/system
+    dest: /etc/systemd/system/systemd-udevd.service.d
     owner: root
     group: root
     mode: 0755
@@ -108,12 +70,6 @@
 - name: "reload systemd"
   command: systemctl daemon-reload
   when: override_result.changed
-
-#- name: "enable brcm43438 service"
-#  service:
-#    name: brcm43438
-#    enabled: yes
-#    state: started
 
 - name: create /opt/sbin
   file:
