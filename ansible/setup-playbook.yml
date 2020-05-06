@@ -46,3 +46,5 @@
       tags: [ install-ansible-aur ]
     - name: bluetooth
       tags: [ bluetooth ]
+    - name: samba
+      tags: [ samba ]
