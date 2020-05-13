@@ -37,6 +37,7 @@
       - flex
       - gcc
       - git
+      - gnu-free-fonts
       - cmake
       - crda
       - iw
