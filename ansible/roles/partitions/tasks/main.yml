@@ -21,32 +21,20 @@
 #
 
 ---
-- name: "performing initial set-up of PES"
-  hosts: localhost
-  vars:
-    build_dir: /home/pi/pes-build
-    build_user: pi
-  connection: local
-  roles:
-    - name: install-packages
-      tags: [ install-packages ]
-    - name: motd
-      tags: [ motd ]
-    - name: user-setup
-      tags: [ user-setup ]
-    - name: customise-os
-      tags: [ customise-os ]
-    - name: systemd-resolved
-      tags: [ systemd-resolved ]
-    - name: timesyncd
-      tags: [ timesyncd ]
-    - name: swap
-      tags: [ swap ]
-    - name: install-ansible-aur
-      tags: [ install-ansible-aur ]
-    - name: bluetooth
-      tags: [ bluetooth ]
-    - name: samba
-      tags: [ samba ]
-    - name: partitions
-      tags: [ partitions ]
+
+- name: "install parted"
+  pacman:
+    state: present
+    name: parted
+
+- name: "create /data partition"
+  parted:
+    device: /dev/mmcblk0
+    number: 3
+    part_type: primary
+    state: present
+
+- name: "format /data partition"
+  filesystem:
+    dev: /dev/mmcblk0p3
+    fstype: vfat
