@@ -30,6 +30,8 @@
   roles:
     - name: install-packages
       tags: [ install-packages ]
+    - name: distcc
+      tags: [ distcc ]
     - name: motd
       tags: [ motd ]
     - name: user-setup
