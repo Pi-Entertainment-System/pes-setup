@@ -44,8 +44,6 @@
       tags: [ timesyncd ]
     - name: swap
       tags: [ swap ]
-    - name: install-ansible-aur
-      tags: [ install-ansible-aur ]
     - name: bluetooth
       tags: [ bluetooth ]
     - name: samba
