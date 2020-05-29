@@ -54,6 +54,8 @@
       - p7zip
       - patch
       - pkg-config
+      - python-dbus
+      - python-pyqt5-sip
       - rsync
       - scons
       - screen
