@@ -54,11 +54,13 @@
       - p7zip
       - patch
       - pkg-config
+      - pyqt-builder
       - python-dbus
       - python-pyqt5-sip
       - rsync
       - scons
       - screen
+      - sip5
       - sudo
       - swig
       - unzip
