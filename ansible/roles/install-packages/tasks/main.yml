@@ -55,8 +55,10 @@
       - patch
       - pkg-config
       - pyqt-builder
+      - python-sqlalchemy
       - python-dbus
       - python-pyqt5-sip
+      - python-requests
       - rsync
       - scons
       - screen
