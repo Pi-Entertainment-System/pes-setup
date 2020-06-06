@@ -57,7 +57,6 @@
       - pyqt-builder
       - python-sqlalchemy
       - python-dbus
-      - python-pyqt5-sip
       - python-requests
       - rsync
       - scons
@@ -65,6 +64,7 @@
       - sip5
       - sudo
       - swig
+      - ttf-liberation
       - unzip
       - vim
       - wget
