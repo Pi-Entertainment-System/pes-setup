@@ -22,6 +22,13 @@
 
 ---
 
+- name: "install bluetooth packages"
+  pacman:
+    state: present
+    name:
+      - bluez
+      - bluez-utils
+
 - name: "auto enable Bluetooth"
   lineinfile:
     path: /etc/bluetooth/main.conf
@@ -35,13 +42,6 @@
     regexp: '^DiscoverableTimeout='
     insertafter: '^#DiscoverableTimeout='
     line: DiscoverableTimeout=0
-
-- name: "install bluetooth packages"
-  pacman:
-    state: present
-    name:
-      - bluetooth-raspberrypi
-      - bluez-utils-compat
 
 - name: "add Bluetooth dtoverlay to /boot/config.txt"
   lineinfile:
