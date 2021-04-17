@@ -63,3 +63,30 @@ umount root
 ```
 
 Now you can boot your Raspberry Pi.
+
+## First Boot
+
+Once your Raspberry Pi has booted, `ssh` in as root and run the following commands:
+
+```
+pacman-key --init
+pacman-key --populate archlinuxarm
+pacman -Syu
+reboot
+```
+
+## Check out this Repository
+
+```
+pacman -S ansible git
+git clone https://github.com/Pi-Entertainment-System/pes-setup
+cd pes-setup
+```
+
+At this point you can enable WiFi if needed e.g.:
+
+```
+ansible-playbook -e 'wifi_psk=WIFI_PASSWORD wifi_ssid=WIFI_NETWORK' enable-wifi.yml
+```
+
+Set *WIFI_PASSWORD* and *WIFI_NETWORK* as necessary.
