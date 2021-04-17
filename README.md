@@ -10,15 +10,15 @@ Pre-built images and user documentation can be found for PES 2.X at: https://pes
 
 **Note:** PES 3.0 is under development
 
-# Installation of Arch Linux
+## Installation of Arch Linux
 
 In all cases at least a 8GB SD card is required.
 
-Created a 500MB fat32 partition followed by an ext4 partition of at at least 6GB.
+Create a 500MB fat32 partition followed by an ext4 partition of at at least 6GB.
 
 Insert the SD card into your Linux system and proceed as follows, substituting the correct device as necessary.
 
-## Raspberry Pi 2/3
+### Raspberry Pi 2/3
 
 ```
 mkdir root boot
@@ -30,11 +30,11 @@ sync
 mv root/boot/* boot/
 ```
 
-## Raspberry Pi 4
+### Raspberry Pi 4
 
 To be done.
 
-## SSH modifcations
+### SSH modifcations
 
 Whilst still mounted, edit `root/etc/ssh/sshd_config` and add:
 
