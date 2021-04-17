@@ -86,7 +86,13 @@ cd pes-setup
 At this point you can enable WiFi if needed e.g.:
 
 ```
-ansible-playbook -e 'wifi_psk=WIFI_PASSWORD wifi_ssid=WIFI_NETWORK' enable-wifi.yml
+ansible-playbook -e 'wifi_psk=WIFI_PASSWORD wifi_ssid=WIFI_NETWORK' ansible/enable-wifi.yml
 ```
 
 Set *WIFI_PASSWORD* and *WIFI_NETWORK* as necessary.
+
+Now set-up Arch Linux for PES:
+
+```
+ansible-playbook ansible/setup-playbook.yml
+```
