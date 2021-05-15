@@ -45,10 +45,10 @@
       - iw
       - joyutils
       - kodi-platform
-      - kodi-rbp
-      - kodi-rbp-dev
-      - kodi-rbp-eventclients
-      - kodi-rbp-tools-texturepacker
+      - kodi-rpi-legacy
+      - kodi-rpi-legacy-dev
+      - kodi-rpi-legacy-eventclients
+      - kodi-rpi-legacy-tools-texturepacker
       - make
       - man
       - mesa
@@ -64,7 +64,6 @@
       - rsync
       - scons
       - screen
-      - sip5
       - sudo
       - swig
       - ttf-liberation

@@ -48,5 +48,3 @@
       tags: [ bluetooth ]
     - name: samba
       tags: [ samba ]
-    - name: partitions
-      tags: [ partitions ]
