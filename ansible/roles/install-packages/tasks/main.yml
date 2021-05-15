@@ -29,6 +29,8 @@
       - autoconf
       - automake
       - bison
+      - bluez
+      - bluez-plugins
       - byacc
       - dhcpcd
       - dosfstools
@@ -41,6 +43,7 @@
       - cmake
       - crda
       - iw
+      - joyutils
       - kodi-platform
       - kodi-rbp
       - kodi-rbp-dev
