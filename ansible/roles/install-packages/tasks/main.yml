@@ -49,6 +49,7 @@
       - kodi-rpi-legacy-dev
       - kodi-rpi-legacy-eventclients
       - kodi-rpi-legacy-tools-texturepacker
+      - libpulse
       - make
       - man
       - mesa
@@ -56,6 +57,8 @@
       - mc
       - p7zip
       - patch
+      - pulseaudio
+      - pulseaudio-alsa
       - pkg-config
       - pyqt-builder
       - python-sqlalchemy
