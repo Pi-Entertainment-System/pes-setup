@@ -50,6 +50,7 @@
       - kodi-rpi-legacy-eventclients
       - kodi-rpi-legacy-tools-texturepacker
       - libpulse
+      - lsof
       - make
       - man
       - mesa
@@ -67,6 +68,7 @@
       - rsync
       - scons
       - screen
+      - strace
       - sudo
       - swig
       - ttf-liberation
