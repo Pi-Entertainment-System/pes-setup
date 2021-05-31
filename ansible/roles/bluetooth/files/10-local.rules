@@ -1,2 +1,0 @@
-# Ansible managed
-ACTION=="add", KERNEL=="hci[0-9]*", RUN+="/opt/sbin/start-bt.sh"
