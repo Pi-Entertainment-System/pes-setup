@@ -1,0 +1,19 @@
+# {{ ansible_managed }}
+
+# See /boot/overlays/README for all available options
+
+# enable bluetooth support
+dtparam=krnbt=on
+enable_uart=0
+
+# CEC settings
+cec_osd_name=PES
+
+# video settings
+gpu_mem=384
+dtoverlay=vc4-kms-v3d,cma-384
+dtoverlay=rpivid-v4l2
+disable_overscan=1
+disable_fw_kms_setup=1
+
+initramfs initramfs-linux.img followkernel

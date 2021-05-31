@@ -26,6 +26,11 @@
   hostname:
     name: pes
 
+- name: "apply /boot/config.txt settings"
+  template:
+    src: config.txt.j2
+    dest: /boot/config
+
 - name: "set timezone to Europe/London"
   timezone:
     name: Europe/London
