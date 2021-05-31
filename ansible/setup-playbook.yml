@@ -29,22 +29,22 @@
   connection: local
   roles:
     - name: install-packages
-      tags: [ install-packages ]
+      tags: install-packages
     - name: distcc
-      tags: [ distcc ]
+      tags: distcc
     - name: motd
-      tags: [ motd ]
+      tags: motd
     - name: user-setup
-      tags: [ user-setup ]
+      tags: user-setup
     - name: customise-os
-      tags: [ customise-os ]
+      tags: customise-os
     - name: systemd-resolved
-      tags: [ systemd-resolved ]
+      tags: systemd-resolved
     - name: timesyncd
-      tags: [ timesyncd ]
+      tags: timesyncd
     - name: swap
-      tags: [ swap ]
+      tags: swap
     - name: bluetooth
-      tags: [ bluetooth ]
+      tags: bluetooth
     - name: samba
-      tags: [ samba ]
+      tags: samba
