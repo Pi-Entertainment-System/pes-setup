@@ -32,7 +32,6 @@
       - byacc
       - dhcpcd
       - dosfstools
-      - dtc
       - fakeroot
       - flex
       - gcc
@@ -60,12 +59,21 @@
       - pulseaudio-alsa
       - pkg-config
       - pyqt-builder
+      - python-pip
+      - python-pyqt5
+      - python-qtpy
       - python-sqlalchemy
       - python-dbus
       - python-requests
+      - qt5-base
+      - qt5-declarative
+      - qt5-multimedia
+      - qt5-quickcontrols
+      - qt5-quickcontrols2
       - rsync
       - scons
       - screen
+      - sdl2
       - strace
       - sudo
       - swig
