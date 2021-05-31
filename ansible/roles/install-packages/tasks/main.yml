@@ -29,8 +29,6 @@
       - autoconf
       - automake
       - bison
-      - bluez
-      - bluez-plugins
       - byacc
       - dhcpcd
       - dosfstools
