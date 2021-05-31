@@ -27,6 +27,7 @@
     state: present
     name:
       - bluez
+      - bluez-plugins
       - bluez-utils
 
 - name: "auto enable Bluetooth"
@@ -35,13 +36,7 @@
     regexp: '^AutoEnable='
     insertafter: '^#AutoEnable='
     line: AutoEnable=true
-
-- name: "disable discoverable timeout"
-  lineinfile:
-    path: /etc/bluetooth/main.conf
-    regexp: '^DiscoverableTimeout='
-    insertafter: '^#DiscoverableTimeout='
-    line: DiscoverableTimeout=0
+  notify: restart bluetooth
 
 - name: "add Bluetooth dtoverlay to /boot/config.txt"
   lineinfile:
@@ -71,30 +66,8 @@
   command: systemctl daemon-reload
   when: override_result.changed
 
-- name: create /opt/sbin
-  file:
-    path: /opt/sbin
-    state: directory
-    mode: 0700
-
-- name: "install start-bt.sh"
-  copy:
-    src: start-bt.sh
-    dest: /opt/sbin/start-bt.sh
-    owner: root
-    group: root
-    mode: 0700
-
-- name: "create start-bt udev rule"
-  copy:
-    src: 10-local.rules
-    dest: /etc/udev/rules.d/10-local.rules
-    owner: root
-    group: root
-    mode: 0644
-
-- name: "disable bluetooth"
+- name: "enable bluetooth"
   service:
     name: bluetooth
-    state: stopped
-    enabled: no
+    state: started
+    enabled: yes
