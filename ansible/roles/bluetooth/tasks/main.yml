@@ -38,13 +38,6 @@
     line: AutoEnable=true
   notify: restart bluetooth
 
-- name: "add Bluetooth dtoverlay to /boot/config.txt"
-  lineinfile:
-    path: /boot/config.txt
-    regexp: '^dtoverlay='
-    insertbefore: '^gpu_mem='
-    line: dtoverlay=bcmbt
-
 - name: "create systemd-udevd.service.d"
   file:
     state: directory
