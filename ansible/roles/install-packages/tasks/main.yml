@@ -39,6 +39,7 @@
       - gnu-free-fonts
       - cmake
       - crda
+      - inetutils
       - iw
       - joyutils
       - kodi-platform
