@@ -29,7 +29,12 @@
 - name: "apply /boot/config.txt settings"
   template:
     src: config.txt.j2
-    dest: /boot/config
+    dest: /boot/config.txt
+
+- name: "apply /boot/cmdline.txt settings"
+  copy:
+    src: cmdline.txt
+    dest: /boot/cmdline.txt
 
 - name: "set timezone to Europe/London"
   timezone:
