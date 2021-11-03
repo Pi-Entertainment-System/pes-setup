@@ -14,7 +14,7 @@ Pre-built images and user documentation can be found for PES 2.X at: https://pes
 
 In all cases at least a 8GB SD card is required.
 
-Create a 500MB fat32 partition followed by an ext4 partition of at at least 6GB.
+Create a 50MB fat32 partition followed by an ext4 partition of at at least 6GB.
 
 Insert the SD card into your Linux system and proceed as follows, substituting the correct device as necessary.
 
