@@ -22,7 +22,7 @@ Insert the SD card into your Linux system and proceed as follows, substituting t
 
 ```
 mkdir root boot
-wget wget http://os.archlinuxarm.org/os/ArchLinuxARM-rpi-2-latest.tar.gz
+wget http://os.archlinuxarm.org/os/ArchLinuxARM-rpi-2-latest.tar.gz
 mount /dev/sdf1 boot
 mount /dev/sdf2 root
 bsdtar -xpf ArchLinuxARM-rpi-2-latest.tar.gz -C root
@@ -32,7 +32,14 @@ mv root/boot/* boot/
 
 ### Raspberry Pi 4
 
-To be done.
+```
+mkdir root boot
+wget http://os.archlinuxarm.org/os/ArchLinuxARM-rpi-4-latest.tar.gz
+mount /dev/sdf1 boot
+mount /dev/sdf2 root
+sync
+mv root/boot/* boot/
+```
 
 ### SSH modifcations
 
