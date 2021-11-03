@@ -85,3 +85,13 @@
       - wpa_supplicant
       - xa
       - zip
+
+- name: check Raspberry Pi model
+  shell: cat /sys/firmware/devicetree/base/model
+  register: model_rslt
+
+- name: install rpi-eeprom for newer Raspberry Pis
+  package:
+    name: rpi-eeprom
+    state: present
+  when: "'Raspberry Pi 4 Model B' in model_rslt.stdout"
