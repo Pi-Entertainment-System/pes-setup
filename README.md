@@ -51,16 +51,22 @@ PermitRootLogin yes
 
 Now add your SSH key(s) to the root account in the image:
 
+If you don't have any SSH keys set-up on your Linux host, make them now else skip this command:
+
+```
+ssh-keygen -t ed25519
+```
+
+Create `authorized_keys` file on Raspberry Pi file system:
+
 ```
 cd root/root
 mkdir .ssh
 chmod 0700 .ssh
-cp ~/.ssh/authorized_keys .ssh/
+cp ~/.ssh/id_ed25519.pub .ssh/authorized_keys
 chmod 0600 .ssh/authorized_keys
 cd ../..
 ```
-
-Note: this assumes you already have a `authorized_keys` set-up on your Linux host that you would also like to use for your Raspberry Pi.
 
 Finally:
 
