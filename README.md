@@ -109,3 +109,34 @@ Now set-up Arch Linux for PES:
 ```
 ansible-playbook ansible/setup-playbook.yml
 ```
+
+## Raspberry Pi 4 Boot Loader Update
+
+If you are using a Raspberry Pi 4, then the `rpi-eeprom` will have been installed. You can check if an update is available for your Raspberry Pi:
+
+```
+rpi-eeprom-update
+```
+
+Example output:
+
+```
+[root@alarmpi ~]# rpi-eeprom-update
+*** UPDATE AVAILABLE ***
+BOOTLOADER: update available
+   CURRENT: Mon Jul 15 12:59:55 UTC 2019 (1563195595)
+    LATEST: Thu Apr 29 16:11:25 UTC 2021 (1619712685)
+   RELEASE: critical (/lib/firmware/raspberrypi/bootloader/critical)
+
+  VL805_FW: Dedicated VL805 EEPROM
+   VL805: update available
+   CURRENT: 000137ad
+    LATEST: 000138a1
+```
+
+If an update is available (as shown in the above example) then you can install it like so:
+
+```
+rpi-eeprom-update -a
+reboot
+```
