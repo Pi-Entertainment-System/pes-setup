@@ -94,6 +94,8 @@ reboot
 pacman -S ansible git
 git clone https://github.com/Pi-Entertainment-System/pes-setup
 cd pes-setup
+git submodule init
+git submodule update
 ```
 
 At this point you can enable WiFi if needed e.g.:
