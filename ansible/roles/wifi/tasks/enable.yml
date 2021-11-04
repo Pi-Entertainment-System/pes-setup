@@ -37,7 +37,7 @@
     dest: /etc/systemd/network/wlan0.network
     owner: root
     group: root
-    mode: 0600
+    mode: 0644
 
 - name: "create dhcpd hook"
   file:
@@ -46,6 +46,7 @@
     dest: /usr/lib/dhcpcd/dhcpcd-hooks/10-wpa_supplicant
     owner: root
     group: root
+    mode: 0644
   notify:
     - restart dhcpcd
 
