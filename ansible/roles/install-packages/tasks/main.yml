@@ -60,6 +60,7 @@
       - pulseaudio-alsa
       - pkg-config
       - pyqt-builder
+      - python-flask
       - python-pip
       - python-pyqt5
       - python-qtpy
