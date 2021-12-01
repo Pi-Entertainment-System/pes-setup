@@ -23,8 +23,9 @@
 ---
 - name: "install packages"
   pacman:
+    name: "{{ item }}"  
     state: present
-    name:
+  with_items: 
       - alsa-utils
       - autoconf
       - automake
@@ -43,10 +44,10 @@
       - iw
       - joyutils
       - kodi-platform
-      - kodi-rpi-legacy
-      - kodi-rpi-legacy-dev
-      - kodi-rpi-legacy-eventclients
-      - kodi-rpi-legacy-tools-texturepacker
+      - kodi-rpi
+      - kodi-rpi-dev
+      - kodi-rpi-eventclients
+      - kodi-rpi-tools-texturepacker
       - libpulse
       - lsof
       - make
@@ -67,6 +68,7 @@
       - python-sqlalchemy
       - python-dbus
       - python-requests
+      - python-waitress
       - qt5-base
       - qt5-declarative
       - qt5-multimedia
