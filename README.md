@@ -101,8 +101,6 @@ pacman-key -lsign 48310703B4D7CD631162265274F5569D8E61676F
 pacman -S ansible git
 git clone https://github.com/Pi-Entertainment-System/pes-setup
 cd pes-setup
-git submodule init
-git submodule update
 ```
 
 At this point you can enable WiFi if needed e.g.:
@@ -118,6 +116,8 @@ Now set-up Arch Linux for PES:
 ```
 ansible-playbook ansible/setup-playbook.yml
 ```
+
+After a successful run all of the packages required to build the PES packages will be installed.
 
 ## Raspberry Pi 4 Boot Loader Update
 
@@ -149,3 +149,11 @@ If an update is available (as shown in the above example) then you can install i
 rpi-eeprom-update -a
 reboot
 ```
+
+## PES Packages
+
+You can now build the packages required by PES. See: https://github.com/Pi-Entertainment-System/pes-packages/blob/main/README.md
+
+Once all of these packages have been built and installed your PES set-up is good to go!
+
+Note: an offical PES packages repository will be publicly hosted at the time of the PES 3.0 release.
