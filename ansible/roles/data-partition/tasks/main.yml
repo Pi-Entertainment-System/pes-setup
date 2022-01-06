@@ -21,32 +21,50 @@
 #
 
 ---
-- name: "performing initial set-up of PES"
-  hosts: localhost
-  vars:
-    build_dir: /home/pi/pes-build
-    build_user: pi
-  connection: local
-  roles:
-    - name: install-packages
-      tags: install-packages
-    - name: distcc
-      tags: distcc
-    - name: motd
-      tags: motd
-    - name: user-setup
-      tags: user-setup
-    - name: customise-os
-      tags: customise-os
-    - name: systemd-resolved
-      tags: systemd-resolved
-    - name: timesyncd
-      tags: timesyncd
-    - name: swap
-      tags: swap
-    - name: data-partition
-      tags: data-partition
-    - name: bluetooth
-      tags: bluetooth
-    - name: samba
-      tags: samba
+- name: "gather existing partition information"
+  parted:
+    device: /dev/mmcblk0
+    unit: MiB
+  register: device_info
+
+- name: "create /data mount point"
+  file:
+    path: /data
+    state: directory
+    mode: "0775"
+
+- name: "create /data FAT32 partition"
+  parted:
+    device: /dev/mmcblk0
+    fs_type: fat32
+    part_end: "100%"
+    part_start: "{{ device_info.partitions[-1].end + 1}}MiB"
+    number: 3
+    state: present
+
+- name: "format /data"
+  filesystem:
+    dev: /dev/mmcblk0p3
+    fstype: vfat
+    opts: "-n data"
+    state: present
+
+- name: "mount /data"
+  mount:
+    boot: yes
+    fstype: vfat
+    path: /data
+    opts: defaults,uid=pi,gid=pi
+    src: /dev/mmcblk0p3
+    state: mounted
+
+- name: "create /data/pes"
+  file:
+    state: directory
+    path: /data/pes
+
+- name: "create sym link for pi user"
+  file:
+    state: link
+    src: /data/pes
+    dest: /home/pi/pes

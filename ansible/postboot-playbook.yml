@@ -21,32 +21,10 @@
 #
 
 ---
-- name: "performing initial set-up of PES"
+- name: "postboot playbook"
   hosts: localhost
-  vars:
-    build_dir: /home/pi/pes-build
-    build_user: pi
+  gather_facts: no
   connection: local
   roles:
-    - name: install-packages
-      tags: install-packages
-    - name: distcc
-      tags: distcc
-    - name: motd
-      tags: motd
-    - name: user-setup
-      tags: user-setup
-    - name: customise-os
-      tags: customise-os
-    - name: systemd-resolved
-      tags: systemd-resolved
-    - name: timesyncd
-      tags: timesyncd
-    - name: swap
-      tags: swap
     - name: data-partition
       tags: data-partition
-    - name: bluetooth
-      tags: bluetooth
-    - name: samba
-      tags: samba
