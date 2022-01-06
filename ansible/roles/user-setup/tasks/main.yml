@@ -68,14 +68,6 @@
     group: root
     mode: 0644
 
-- name: "create pes build dir"
-  file:
-    path: "{{ build_dir }}"
-    state: directory
-    mode: 0700
-    owner: pi
-    group: pi
-
 - name: "remove alarm user"
   user:
     name: alarm

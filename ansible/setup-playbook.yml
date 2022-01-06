@@ -23,9 +23,6 @@
 ---
 - name: "performing initial set-up of PES"
   hosts: localhost
-  vars:
-    build_dir: /home/pi/pes-build
-    build_user: pi
   connection: local
   roles:
     - name: install-packages
