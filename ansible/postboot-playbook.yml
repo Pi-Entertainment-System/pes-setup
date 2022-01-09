@@ -28,3 +28,5 @@
   roles:
     - name: data-partition
       tags: data-partition
+    - name: kodi
+      tags: kodi
