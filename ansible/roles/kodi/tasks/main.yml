@@ -19,36 +19,35 @@
 #    You should have received a copy of the GNU General Public License
 #    along with PES.  If not, see <http://www.gnu.org/licenses/>.
 #
-
 ---
 
-- name: "install samba"
-  pacman:
-    state: present
-    name: samba
-
-- name: "remove /etc/samba/smb.conf.default"
+- name: create Kodi dirs for pi user
   file:
-    path: /etc/samba/smb.conf.default
-    state: absent
+    state: directory
+    path: "{{ item }}"
+    owner: pi
+    group: pi
+    mode: 0755
+  with_items:
+    - /home/pi/.kodi
+    - /home/pi/.kodi/userdata
+    - /data/pes/kodi
+    - /data/pes/kodi/Movies
+    - /data/pes/kodi/Music
+    - /data/pes/kodi/Pictures
+    - /data/pes/kodi/TV
 
-- name: "create /etc/samba/smb.conf"
+- name: check if ~pi/.kodi/userdata/sources.xml exists
+  stat:
+    path: /home/pi/.kodi/userdata/sources.xml
+  register: stat_rslt
+
+- name: create ~pi/.kodi/userdata/sources.xml
   copy:
-    src: smb.conf
-    dest: /etc/samba/smb.conf
-    owner: root
-    group: root
+    src: sources.xml
+    dest: /home/pi/.kodi/userdata/sources.xml
+    owner: pi
+    group: pi
     mode: 0644
-  notify: restart smb
-
-- name: "enable smb"
-  service:
-    name: smb
-    state: started
-    enabled: yes
-
-- name: "enable nmb"
-  service:
-    name: nmb
-    state: started
-    enabled: yes
+  when: not stat_rslt.stat.exists
+  

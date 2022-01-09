@@ -21,7 +21,7 @@
 #
 
 ---
-- name: "performing initial set-up of PES"
+- name: "performing initial dev set-up of PES"
   hosts: localhost
   connection: local
   roles:
@@ -45,5 +45,7 @@
       tags: data-partition
     - name: bluetooth
       tags: bluetooth
+    - name: kodi
+      tags: kodi
     - name: samba
       tags: samba
