@@ -31,6 +31,7 @@
   with_items:
     - /home/pi/.kodi
     - /home/pi/.kodi/userdata
+    - /home/pi/.kodi/userdata/peripheral_data
     - /data/pes/kodi
     - /data/pes/kodi/Movies
     - /data/pes/kodi/Music
@@ -40,7 +41,7 @@
 - name: check if ~pi/.kodi/userdata/sources.xml exists
   stat:
     path: /home/pi/.kodi/userdata/sources.xml
-  register: stat_rslt
+  register: sources_stat_rslt
 
 - name: create ~pi/.kodi/userdata/sources.xml
   copy:
@@ -49,4 +50,18 @@
     owner: pi
     group: pi
     mode: 0644
-  when: not stat_rslt.stat.exists
+  when: not sources_stat_rslt.stat.exists
+
+- name: check if ~/pi/.kodi/userdata/peripheral_data/cec_CEC_Adapter.xml exists
+  stat:
+    path: /home/pi/.kodi/userdata/peripheral_data/cec_CEC_Adapter.xml
+  register: cec_rslt
+
+- name: create ~/pi/.kodi/userdata/peripheral_data/cec_CEC_Adapter.xml
+  copy:
+    src: cec_CEC_Adapter.xml
+    dest: /home/pi/.kodi/userdata/peripheral_data/cec_CEC_Adapter.xml
+    owner: pi
+    group: pi
+    mode: 0644
+  when: not cec_rslt.stat.exists
