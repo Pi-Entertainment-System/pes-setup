@@ -68,6 +68,22 @@
     group: root
     mode: 0644
 
+- name: "set-up pi .bash_profile"
+  copy:
+    src: bash_profile
+    dest: /home/pi/.bash_profile
+    owner: pi
+    group: pi
+    mode: 0600
+
+- name: "set-up pi .bashrc"
+  copy:
+    src: bashrc
+    dest: /home/pi/.bashrc
+    owner: pi
+    group: pi
+    mode: 0600
+
 - name: "remove alarm user"
   user:
     name: alarm

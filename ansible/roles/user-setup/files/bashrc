@@ -1,0 +1,18 @@
+#
+# ~/.bashrc
+#
+
+# Ansible managed
+
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+alias ls='ls --color=auto'
+alias ll='ls -l'
+
+if [ ! -n "$SSH_CONNECTION" ] && [ ! -n "$DESKTOP_SESSION" ]; then
+  if ! mount | grep -q '/data' || [ ! -d ~/.kodi ]; then
+    sudo ansible-playbook /opt/pes/set-up/postboot-playbook.yml
+  fi
+  /opt/pes/bin/pes
+fi
