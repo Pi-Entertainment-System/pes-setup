@@ -88,7 +88,7 @@ pacman -Syu
 reboot
 ```
 
-If you plan to use PES packages that have been signed, then import the key. For example, to import the GPG key used to sign offical PES packages by Neil Munday:
+If you plan to use PES packages that have been signed, then import the key. For example, to import the GPG key used to sign official PES packages by Neil Munday:
 
 ```
 pacman-key --recv-keys 48310703B4D7CD631162265274F5569D8E61676F
@@ -114,7 +114,7 @@ Set *WIFI_PASSWORD* and *WIFI_NETWORK* as necessary.
 Now set-up Arch Linux for PES:
 
 ```
-ansible-playbook ansible/setup-playbook.yml
+ansible-playbook ansible/dev-playbook.yml
 ```
 
 After a successful run all of the packages required to build the PES packages will be installed.
