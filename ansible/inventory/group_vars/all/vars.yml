@@ -1,0 +1,21 @@
+---
+
+ansible_connection: local
+ansible_python_interpreter: auto_silent
+
+dev_packages:
+  - autoconf
+  - automake
+  - bison
+  - byacc
+  - fakeroot
+  - flex
+  - gcc
+  - git
+  - cmake
+  - kodi-rpi-dev
+  - make
+  - patch
+  - python-pip
+  - python-sphinx
+  - pkgconf

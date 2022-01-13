@@ -21,33 +21,9 @@
 #
 
 ---
-- name: "performing initial dev set-up of PES"
-  hosts: localhost
-  connection: local
-  vars:
-    dev_mode: yes
-  roles:
-    - name: install-packages
-      tags: install-packages
-    - name: distcc
-      tags: distcc
-    - name: motd
-      tags: motd
-    - name: user-setup
-      tags: user-setup
-    - name: customise-os
-      tags: customise-os
-    - name: systemd-resolved
-      tags: systemd-resolved
-    - name: timesyncd
-      tags: timesyncd
-    - name: swap
-      tags: swap
-    - name: data-partition
-      tags: data-partition
-    - name: bluetooth
-      tags: bluetooth
-    - name: kodi
-      tags: kodi
-    - name: samba
-      tags: samba
+- name: "uninstall dev packages"
+  pacman:
+    name: "{{ item }}"
+    state: absent
+  with_items: "{{ dev_packages }}"
+  when: not dev_mode

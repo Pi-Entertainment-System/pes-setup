@@ -25,12 +25,12 @@
   hosts: localhost
   connection: local
   vars:
-    dev_mode: yes
+    dev_mode: no
   roles:
     - name: install-packages
       tags: install-packages
-    - name: distcc
-      tags: distcc
+    - name: uninstall-packages
+      tags: uninstall-packages
     - name: motd
       tags: motd
     - name: user-setup

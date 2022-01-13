@@ -25,22 +25,8 @@
   pacman:
     name: "{{ item }}"
     state: present
-  with_items:
-      - autoconf
-      - automake
-      - bison
-      - byacc
-      - fakeroot
-      - flex
-      - gcc
-      - git
-      - cmake
-      - kodi-rpi-dev
-      - make
-      - patch
-      - python-pip
-      - python-sphinx
-      - pkg-config
+  with_items: "{{ dev_packages }}"
+  when: dev_mode
 
 - name: install common packages
   package:
