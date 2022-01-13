@@ -114,7 +114,7 @@ Set *WIFI_PASSWORD* and *WIFI_NETWORK* as necessary.
 Now set-up Arch Linux for PES:
 
 ```
-ansible-playbook ansible/dev-playbook.yml
+ansible-playbook -i ansible/inventory ansible/dev-playbook.yml
 ```
 
 After a successful run all of the packages required to build the PES packages will be installed.
