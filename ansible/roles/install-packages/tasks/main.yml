@@ -38,6 +38,8 @@
       - kodi-rpi-dev
       - make
       - patch
+      - python-pip
+      - python-sphinx
       - pkg-config
 
 - name: install common packages
@@ -69,10 +71,8 @@
       - pulseaudio-alsa
       - python-dbus
       - python-flask
-      - python-pip
       - python-pyqt5
       - python-qtpy
-      - python-sphinx
       - python-sqlalchemy
       - python-requests
       - python-waitress
