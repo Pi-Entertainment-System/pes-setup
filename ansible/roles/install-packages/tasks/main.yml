@@ -21,47 +21,52 @@
 #
 
 ---
-- name: "install packages"
+- name: "install dev packages"
   pacman:
     name: "{{ item }}"
     state: present
   with_items:
-      - alsa-utils
       - autoconf
       - automake
       - bison
       - byacc
-      - dhcpcd
-      - dosfstools
       - fakeroot
       - flex
       - gcc
       - git
-      - gnu-free-fonts
       - cmake
+      - kodi-rpi-dev
+      - make
+      - patch
+      - pkg-config
+
+- name: install common packages
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items:
+      - alsa-utils
+      - dhcpcd
+      - dosfstools
+      - gnu-free-fonts
       - crda
       - inetutils
       - iw
       - joyutils
       - kodi-platform
       - kodi-rpi
-      - kodi-rpi-dev
       - kodi-rpi-eventclients
       - kodi-rpi-tools-texturepacker
       - libpulse
       - lsof
-      - make
       - man
       - mesa
       - mesa-libgl
       - mc
       - p7zip
       - parted
-      - patch
       - pulseaudio
       - pulseaudio-alsa
-      - pkg-config
-      - pyqt-builder
       - python-dbus
       - python-flask
       - python-pip
