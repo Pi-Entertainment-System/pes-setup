@@ -25,6 +25,8 @@
 ansible_connection: local
 ansible_python_interpreter: auto_silent
 
+pes_repo_url: https://pes.mundayweb.com/repo
+
 dev_packages:
   - autoconf
   - automake
@@ -41,3 +43,29 @@ dev_packages:
   - python-pip
   - python-sphinx
   - pkgconf
+
+pes_packages:
+  - pes-kodi-addon-peripheral-joystick
+  - pes-libcec
+  - pes-libretro-beetle-pce-fast
+  - pes-libretro-blue-msx
+  - pes-libretro-fba2012-neogeo
+  - pes-libretro-fceu-next
+  - pes-libretro-fuse
+  - pes-libretro-gambatte
+  - pes-libretro-genesis-plus-gx
+  - pes-libretro-gpsp
+  - pes-libretro-mame2003
+  - pes-libretro-mupen64plus-nx
+  - pes-libretro-pcsx_rearmed
+  - pes-libretro-picodrive
+  - pes-libretro-snes9x2010
+  - pes-libretro-stella2014
+  - pes-libretro-vice
+  - pes-ppsspp
+  - pes-rasum
+  - pes-retroarch
+  - pes-retroarch-assets
+  - python-coloredlogs
+  - python-humanfriendly
+  - python-pysdl2

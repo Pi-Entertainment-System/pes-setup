@@ -111,7 +111,7 @@ ansible-playbook -e 'wifi_psk=WIFI_PASSWORD wifi_ssid=WIFI_NETWORK' ansible/enab
 
 Set *WIFI_PASSWORD* and *WIFI_NETWORK* as necessary.
 
-Now set-up Arch Linux for PES:
+Now set-up Arch Linux for PES development:
 
 ```
 ansible-playbook -i ansible/inventory ansible/dev-playbook.yml
@@ -154,6 +154,18 @@ reboot
 
 You can now build the packages required by PES. See: https://github.com/Pi-Entertainment-System/pes-packages/blob/main/README.md
 
-Once all of these packages have been built and installed your PES set-up is good to go!
+Once built you can install the packages local by using `sudo pacman -U package_name.tar.xz`. However, it is advised to create a pacman repository on a web server that your Raspberry Pi to install packages from.
 
-Note: an offical PES packages repository will be publicly hosted at the time of the PES 3.0 release.
+Note: an official PES packages repository will be publicly hosted at the time of the PES 3.0 release.
+
+## Creating a Release Image of PES
+
+PES on the Raspberry Pi is supplied as a Raspberry Pi image file that can be written to a SD card. When creating a PES set-up several development packages are installed by the Ansible `dev-playbook`. These are not needed by a PES installation once all packages have been built. The Ansible `setup-playbook` is intended to prepare a Raspbery Pi PES installation for image creation. It will for example uninstall development packages, delete unnecessary files, set-up the PES pacman repository etc.
+
+```
+ansible-playbook -i ansible/inventory -e pes_repo_url=URL_TO_PES_REPO ansible/setup-playbook.yml
+```
+
+If you do not specify `pes_repo_url`, the default value: https://pes.mundayweb.com/repo will be used.
+
+Alternatively, you can create a fresh Arch Linux installation and use the above command to turn into a working PES set-up.

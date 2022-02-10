@@ -21,35 +21,21 @@
 #
 
 ---
-- name: "performing initial dev set-up of PES"
-  hosts: localhost
-  connection: local
-  vars:
-    dev_mode: no
-  roles:
-    - name: pacman
-      tags: pacman
-    - name: install-packages
-      tags: install-packages
-    - name: uninstall-packages
-      tags: uninstall-packages
-    - name: motd
-      tags: motd
-    - name: user-setup
-      tags: user-setup
-    - name: customise-os
-      tags: customise-os
-    - name: systemd-resolved
-      tags: systemd-resolved
-    - name: timesyncd
-      tags: timesyncd
-    - name: swap
-      tags: swap
-    - name: data-partition
-      tags: data-partition
-    - name: bluetooth
-      tags: bluetooth
-    - name: kodi
-      tags: kodi
-    - name: samba
-      tags: samba
+
+- name: "add PES repository: {{ pes_repo_url }}"
+  template:
+    src: pacman.conf.j2
+    dest: /etc/pacman.conf
+    owner: root
+    group: root
+    mode: 0644
+
+- name: "check for PES pacman database"
+  stat:
+    path: /var/lib/pacman/sync/pes.db
+  register: db_rslt
+
+- name: "add PES database to pacman"
+  command: pacman -Sy
+  when: not db_rslt.stat.exists
+  
