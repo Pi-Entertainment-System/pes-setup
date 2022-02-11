@@ -47,7 +47,7 @@
       - kodi-rpi-tools-texturepacker
       - libpulse
       - lsof
-      - man
+      - man-db
       - mesa
       - mesa-libgl
       - mc
