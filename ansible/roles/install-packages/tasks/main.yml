@@ -49,7 +49,6 @@
       - lsof
       - man-db
       - mesa
-      - mesa-libgl
       - mc
       - p7zip
       - parted
