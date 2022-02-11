@@ -34,6 +34,7 @@
     state: present
   with_items:
       - alsa-utils
+      - dbus-python 
       - dhcpcd
       - dosfstools
       - gnu-free-fonts
@@ -54,7 +55,6 @@
       - parted
       - pulseaudio
       - pulseaudio-alsa
-      - python-dbus
       - python-flask
       - python-pyqt5
       - python-qtpy
