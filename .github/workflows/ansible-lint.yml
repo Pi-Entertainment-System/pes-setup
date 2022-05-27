@@ -11,3 +11,5 @@ jobs:
         run: ansible-galaxy collection install -p /usr/share/ansible/collections -f community.general
       - name: Run ansible-lint
         uses: ansible-community/ansible-lint-action@main
+        env:
+          ANSIBLE_LIBRARY: '/usr/share/ansible/collections'
