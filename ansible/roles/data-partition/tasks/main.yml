@@ -22,7 +22,7 @@
 
 ---
 - name: "gather existing partition information"
-  parted:
+  community.general.parted:
     device: /dev/mmcblk0
     unit: MiB
   register: device_info
@@ -34,7 +34,7 @@
     mode: "0755"
 
 - name: "create /data FAT32 partition"
-  parted:
+  community.general.parted:
     device: /dev/mmcblk0
     fs_type: fat32
     part_end: "100%"
