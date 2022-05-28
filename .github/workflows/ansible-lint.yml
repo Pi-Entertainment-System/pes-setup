@@ -2,13 +2,13 @@ name: Ansible Lint
 on:
   push:
     paths:
-      - 'ansible/roles/**.py'
+      - 'ansible/roles/**.yml'
   pull_request:
     paths:
-      - 'ansible/roles/**.py'
+      - 'ansible/roles/**.yml'
   workflow_dispatch:
     paths:
-      - 'ansible/roles/**.py'
+      - 'ansible/roles/**.yml'
 
 jobs:
   build:
