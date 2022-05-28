@@ -23,31 +23,31 @@
 ---
 
 - name: "set fact"
-  set_fact:
+  ansible.builtin.set_fact:
     swap_file: "/swap"
 
 - name: "check for swap file"
-  stat:
+  ansible.builtin.stat:
     path: "{{ swap_file }}"
   register: swap_file_check
 
 - name: "create swap file"
-  command: fallocate -l 128M {{ swap_file }}
+  ansible.builtin.command: fallocate -l 128M {{ swap_file }}
   when: not swap_file_check.stat.exists
 
 - name: "set swap file permissions"
-  file:
+  ansible.builtin.file:
     path: "{{ swap_file }}"
     owner: root
     group: root
     mode: 0600
 
 - name: "format swap file"
-  command: mkswap {{ swap_file }}
+  ansible.builtin.command: mkswap {{ swap_file }}
   when: not swap_file_check.stat.exists
 
 - name: "add fstab entry for swap file"
-  mount:
+  ansible.posix.mount:
     name: none
     src: "{{ swap_file }}"
     fstype: swap
@@ -55,5 +55,5 @@
     state: present
 
 - name: "turn swap on"
-  command: swapon {{ swap_file }}
+  ansible.builtin.command: swapon {{ swap_file }}
   when: not swap_file_check.stat.exists

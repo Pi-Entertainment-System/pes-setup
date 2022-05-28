@@ -23,17 +23,17 @@
 ---
 
 - name: "add pi group"
-  group:
+  ansible.builtin.group:
     name: pi
     state: present
 
 - name: "add sudoers group"
-  group:
+  ansible.builtin.group:
     name: sudoers
     state: present
 
 - name: "create /etc/sudoers.d/sudoers"
-  copy:
+  ansible.builtin.copy:
     src: sudoers
     dest: /etc/sudoers.d/sudoers
     owner: root
@@ -42,7 +42,7 @@
     validate: /usr/sbin/visudo -csf %s
 
 - name: "add pi user"
-  user:
+  ansible.builtin.user:
     name: pi
     comment: pi
     group: pi
@@ -53,7 +53,7 @@
     state: present
 
 - name: "create /etc/systemd/system/getty@tty1.service.d"
-  file:
+  ansible.builtin.file:
     path: "/etc/systemd/system/getty@tty1.service.d"
     state: directory
     mode: 0755
@@ -61,7 +61,7 @@
     group: root
 
 - name: "enable auto login for pi user"
-  copy:
+  ansible.builtin.copy:
     src: autologin.conf
     dest: /etc/systemd/system/getty@tty1.service.d/autologin.conf
     owner: root
@@ -69,7 +69,7 @@
     mode: 0644
 
 - name: "set-up pi .bash_profile"
-  copy:
+  ansible.builtin.copy:
     src: bash_profile
     dest: /home/pi/.bash_profile
     owner: pi
@@ -77,7 +77,7 @@
     mode: 0600
 
 - name: "set-up pi .bashrc"
-  copy:
+  ansible.builtin.copy:
     src: bashrc
     dest: /home/pi/.bashrc
     owner: pi
@@ -85,12 +85,12 @@
     mode: 0600
 
 - name: "remove alarm user"
-  user:
+  ansible.builtin.user:
     name: alarm
     state: absent
-    force: yes
+    force: true
 
 - name: "remove alarm group"
-  group:
+  ansible.builtin.group:
     name: alarm
     state: absent

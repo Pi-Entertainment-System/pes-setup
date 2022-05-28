@@ -22,78 +22,80 @@
 
 ---
 - name: "install dev packages"
-  pacman:
+  community.general.pacman:
     name: "{{ item }}"
     state: present
   with_items: "{{ dev_packages }}"
   when: dev_mode
 
 - name: install common packages
-  pacman:
+  community.general.pacman:
     name: "{{ item }}"
     state: present
   with_items:
-      - alsa-utils
-      - dbus-python 
-      - dhcpcd
-      - dosfstools
-      - gnu-free-fonts
-      - crda
-      - inetutils
-      - iw
-      - joyutils
-      - kodi-platform
-      - kodi-rpi
-      - kodi-rpi-eventclients
-      - kodi-rpi-tools-texturepacker
-      - libpulse
-      - lsof
-      - man-db
-      - mesa
-      - mc
-      - p7zip
-      - parted
-      - pulseaudio
-      - pulseaudio-alsa
-      - python-flask
-      - python-pyqt5
-      - python-qtpy
-      - python-sqlalchemy
-      - python-requests
-      - python-waitress
-      - qt5-base
-      - qt5-declarative
-      - qt5-multimedia
-      - qt5-quickcontrols
-      - qt5-quickcontrols2
-      - rsync
-      - scons
-      - screen
-      - sdl2
-      - strace
-      - sudo
-      - swig
-      - ttf-liberation
-      - unzip
-      - vim
-      - wget
-      - wpa_supplicant
-      - xa
-      - zip
+    - alsa-utils
+    - dbus-python
+    - dhcpcd
+    - dosfstools
+    - gnu-free-fonts
+    - crda
+    - inetutils
+    - iw
+    - joyutils
+    - kodi-platform
+    - kodi-rpi
+    - kodi-rpi-eventclients
+    - kodi-rpi-tools-texturepacker
+    - libpulse
+    - lsof
+    - man-db
+    - mesa
+    - mc
+    - p7zip
+    - parted
+    - pulseaudio
+    - pulseaudio-alsa
+    - python-flask
+    - python-pyqt5
+    - python-qtpy
+    - python-sqlalchemy
+    - python-requests
+    - python-waitress
+    - qt5-base
+    - qt5-declarative
+    - qt5-multimedia
+    - qt5-quickcontrols
+    - qt5-quickcontrols2
+    - rsync
+    - scons
+    - screen
+    - sdl2
+    - strace
+    - sudo
+    - swig
+    - ttf-liberation
+    - unzip
+    - vim
+    - wget
+    - wpa_supplicant
+    - xa
+    - zip
 
 - name: install PES packages
-  pacman:
+  community.general.pacman:
     name: "{{ item }}"
     state: present
   with_items: "{{ pes_packages }}"
   when: not dev_mode
 
 - name: check Raspberry Pi model
-  shell: cat /sys/firmware/devicetree/base/model
+  ansible.builtin.command:
+    cmd: cat /sys/firmware/devicetree/base/model
   register: model_rslt
+  changed_when: model_rslt.rc != 0
 
 - name: install rpi-eeprom for newer Raspberry Pis
-  package:
+  ansible.builtin.package:
     name: rpi-eeprom
     state: present
   when: "'Raspberry Pi 4 Model B' in model_rslt.stdout"

@@ -28,7 +28,7 @@
   register: device_info
 
 - name: "create /data mount point"
-  file:
+  ansible.builtin.file:
     path: /data
     state: directory
     mode: "0755"
@@ -38,20 +38,20 @@
     device: /dev/mmcblk0
     fs_type: fat32
     part_end: "100%"
-    part_start: "{{ device_info.partitions[-1].end + 1}}MiB"
+    part_start: "{{ device_info.partitions[-1].end + 1 }}MiB"
     number: 3
     state: present
 
 - name: "format /data"
-  filesystem:
+  community.general.filesystem:
     dev: /dev/mmcblk0p3
     fstype: vfat
     opts: "-n data"
     state: present
 
 - name: "mount /data"
-  mount:
-    boot: yes
+  ansible.posix.mount:
+    boot: true
     fstype: vfat
     path: /data
     opts: defaults,uid=pi,gid=pi
@@ -59,12 +59,13 @@
     state: mounted
 
 - name: "create /data/pes"
-  file:
+  ansible.builtin.file:
     state: directory
     path: /data/pes
+    mode: "0755"
 
 - name: "create sym link for pi user"
-  file:
+  ansible.builtin.file:
     state: link
     src: /data/pes
     dest: /home/pi/pes

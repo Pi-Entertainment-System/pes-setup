@@ -22,20 +22,23 @@
 
 ---
 - name: "set-up config"
-  copy:
+  ansible.builtin.copy:
     src: timesyncd.conf
     dest: /etc/systemd/timesyncd.conf
     owner: root
     group: root
-    mode: 644
+    mode: 0644
   notify:
     - restart systemd-timesyncd
 
 - name: "enable NTP via timedatectl"
-  command: timedatectl set-ntp true
+  ansible.builtin.command:
+    cmd: timedatectl set-ntp true
+  register: timedatectl_output
+  changed_when: timedatectl_output.rc != 0
 
 - name: "enable systemd-timesyncd service"
-  service:
+  ansible.builtin.service:
     name: systemd-timesyncd
     state: started
-    enabled: yes
+    enabled: true

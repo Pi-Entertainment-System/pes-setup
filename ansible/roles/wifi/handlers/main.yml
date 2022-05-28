@@ -22,13 +22,13 @@
 
 ---
 - name: "restart dhcpcd"
-  service:
+  ansible.builtin.service:
     name: dhcpcd
     state: restarted
   listen: "restart dhcpcd"
 
 - name: "restart wlan0"
-  service:
+  ansible.builtin.service:
     name: wpa_supplicant@wlan0
     state: restarted
   listen: "restart wlan0"

@@ -22,7 +22,7 @@
 
 ---
 - name: "disable wlan0"
-  service:
+  ansible.builtin.service:
     name: wpa_supplicant@wlan0
     state: stopped
-    enabled: no
+    enabled: false

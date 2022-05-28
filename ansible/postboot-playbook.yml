@@ -26,7 +26,7 @@
   gather_facts: no
   connection: local
   roles:
-    - name: data-partition
-      tags: data-partition
+    - name: data_partition
+      tags: data_partition
     - name: kodi
       tags: kodi

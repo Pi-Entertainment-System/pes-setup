@@ -22,7 +22,7 @@
 
 ---
 - name: "create /etc/wpa_supplicant/wpa_supplicant-wlan0.conf"
-  template:
+  ansible.builtin.template:
     src: wpa_supplicant-wlan0.conf.j2
     dest: /etc/wpa_supplicant/wpa_supplicant-wlan0.conf
     owner: root
@@ -32,7 +32,7 @@
     - restart wlan0
 
 - name: "create /etc/systemd/network/wlan0.network"
-  copy:
+  ansible.builtin.copy:
     src: wlan0.network
     dest: /etc/systemd/network/wlan0.network
     owner: root
@@ -40,7 +40,7 @@
     mode: 0644
 
 - name: "create dhcpd hook"
-  file:
+  ansible.builtin.file:
     state: link
     src: /usr/share/dhcpcd/hooks/10-wpa_supplicant
     dest: /usr/lib/dhcpcd/dhcpcd-hooks/10-wpa_supplicant
@@ -51,7 +51,7 @@
     - restart dhcpcd
 
 - name: "enable wlan0"
-  service:
+  ansible.builtin.service:
     name: wpa_supplicant@wlan0
     state: started
-    enabled: yes
+    enabled: true

@@ -23,7 +23,7 @@
 ---
 
 - name: restart smb
-  service:
+  ansible.builtin.service:
     name: smb
     state: restarted
   listen: restart smb

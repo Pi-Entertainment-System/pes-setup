@@ -29,24 +29,24 @@
   roles:
     - name: pacman
       tags: pacman
-    - name: install-packages
-      tags: install-packages
-    - name: uninstall-packages
-      tags: uninstall-packages
+    - name: install_packages
+      tags: install_packages
+    - name: uninstall_packages
+      tags: uninstall_packages
     - name: motd
       tags: motd
-    - name: user-setup
-      tags: user-setup
-    - name: customise-os
-      tags: customise-os
-    - name: systemd-resolved
-      tags: systemd-resolved
+    - name: user_setup
+      tags: user_setup
+    - name: customise_os
+      tags: customise_os
+    - name: systemd_resolved
+      tags: systemd_resolved
     - name: timesyncd
       tags: timesyncd
     - name: swap
       tags: swap
-    - name: data-partition
-      tags: data-partition
+    - name: data_partition
+      tags: data_partition
     - name: bluetooth
       tags: bluetooth
     - name: kodi

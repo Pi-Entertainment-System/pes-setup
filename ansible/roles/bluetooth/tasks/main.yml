@@ -23,7 +23,7 @@
 ---
 
 - name: "install bluetooth packages"
-  pacman:
+  community.general.pacman:
     state: present
     name:
       - bluez
@@ -31,7 +31,7 @@
       - bluez-utils
 
 - name: "auto enable Bluetooth"
-  lineinfile:
+  ansible.builtin.lineinfile:
     path: /etc/bluetooth/main.conf
     regexp: '^AutoEnable='
     insertafter: '^#AutoEnable='
@@ -39,7 +39,7 @@
   notify: restart bluetooth
 
 - name: "create systemd-udevd.service.d"
-  file:
+  ansible.builtin.file:
     state: directory
     dest: /etc/systemd/system/systemd-udevd.service.d
     owner: root
@@ -47,20 +47,10 @@
     mode: 0755
 
 - name: "create systemd-udevd.service.d/override.conf"
-  copy:
+  ansible.builtin.copy:
     src: systemd-udevd.service.d/override.conf
     dest: /etc/systemd/system/systemd-udevd.service.d/override.conf
     owner: root
     group: root
     mode: 0644
-  register: override_result
-
-- name: "reload systemd"
-  command: systemctl daemon-reload
-  when: override_result.changed
-
-- name: "enable bluetooth"
-  service:
-    name: bluetooth
-    state: started
-    enabled: yes
+  notify: restart bluetooth
