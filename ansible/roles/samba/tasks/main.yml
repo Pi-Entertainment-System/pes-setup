@@ -45,7 +45,7 @@
   ansible.builtin.service:
     name: smb
     state: started
-    enabled: yes
+    enabled: true
 
 - name: "enable nmb"
   ansible.builtin.service:
