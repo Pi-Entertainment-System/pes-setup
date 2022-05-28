@@ -1,5 +1,14 @@
 name: Ansible Lint
-on: [push, pull_request, workflow_dispatch]
+on:
+  push:
+    paths:
+      - 'ansible/roles/**.py'
+  pull_request:
+    paths:
+      - 'ansible/roles/**.py'
+  workflow_dispatch:
+    paths:
+      - 'ansible/roles/**.py'
 
 jobs:
   build:
@@ -7,9 +16,15 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - name: install collections
-        run: ansible-galaxy collection install -p /usr/share/ansible/collections -f community.general
-      - name: Run ansible-lint
-        uses: ansible-community/ansible-lint-action@main
-        env:
-          ANSIBLE_LIBRARY: '/usr/share/ansible/collections'
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v3
+        with:
+          python-version: 3.8
+      - name: install ansible-lint
+        run: pip install "ansible-lint"
+      - name: install community.general
+        run: ansible-galaxy collection install -f community.general
+      - name: install ansible.posix
+        run: ansible-galaxy collection install -f ansible.posix
+      - name: lint files
+        run: ansible-lint ansible/roles/*
