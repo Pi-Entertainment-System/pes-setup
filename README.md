@@ -1,5 +1,7 @@
 # PES Setup
 
+[![GitHub stars](https://img.shields.io/github/stars/Pi-Entertainment-System/pes-setup)](https://github.com/Pi-Entertainment-System/pes-setup/stargazers) [![GitHub issues](https://img.shields.io/github/issues/Pi-Entertainment-System/pes-setup)](https://github.com/Pi-Entertainment-System/pes-setup/issues) ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/Pi-Entertainment-System/pes-setup/Ansible%20Lint) [![GitHub license](https://img.shields.io/github/license/Pi-Entertainment-System/pes-setup)](https://github.com/Pi-Entertainment-System/pes-setup/blob/main/LICENSE)
+
 Repository containing all the files and scripts required to set-up PES.
 
 [Ansible](https://www.ansible.com/) is used to automate the installation of PES 3.0 for development and deployment.
