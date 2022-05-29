@@ -32,7 +32,7 @@
     dest: /boot/config.txt
     owner: root
     group: root
-    mode: 0644
+    mode: 0755
 
 - name: "apply /boot/cmdline.txt settings"
   ansible.builtin.copy:
@@ -40,7 +40,7 @@
     dest: /boot/cmdline.txt
     owner: root
     group: root
-    mode: 0644
+    mode: 0755
 
 - name: "set timezone to Europe/London"
   community.general.timezone:
