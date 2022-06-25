@@ -66,6 +66,7 @@ pes_packages:
   - pes-rasum
   - pes-retroarch
   - pes-retroarch-assets
+  - pes-retroarch-coreinfo
   - python-coloredlogs
   - python-humanfriendly
   - python-pysdl2
