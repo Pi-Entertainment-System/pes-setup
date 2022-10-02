@@ -39,6 +39,7 @@ mkdir root boot
 wget http://os.archlinuxarm.org/os/ArchLinuxARM-rpi-armv7-latest.tar.gz
 mount /dev/sdf1 boot
 mount /dev/sdf2 root
+bsdtar -xpf ArchLinuxARM-rpi-armv7-latest.tar.gz -C root
 sync
 mv root/boot/* boot/
 ```
