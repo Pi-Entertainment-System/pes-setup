@@ -45,6 +45,7 @@ dev_packages:
   - pkgconf
 
 pes_packages:
+  - pes-gui
   - pes-kodi-addon-peripheral-joystick
   - pes-libcec
   - pes-libretro-beetle-pce-fast
