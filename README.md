@@ -95,7 +95,7 @@ If you plan to use PES packages that have been signed, then import the key. For 
 
 ```
 pacman-key --recv-keys 48310703B4D7CD631162265274F5569D8E61676F
-pacman-key -lsign 48310703B4D7CD631162265274F5569D8E61676F
+pacman-key --lsign 48310703B4D7CD631162265274F5569D8E61676F
 ```
 
 ## Check out this Repository
