@@ -16,7 +16,7 @@ fi
 
 if [ ! -n "$SSH_CONNECTION" ] && [ ! -n "$DESKTOP_SESSION" ]; then
   if ! mount | grep -q '/data' || [ ! -d ~/.kodi ]; then
-    sudo ansible-playbook /opt/pes/set-up/postboot-playbook.yml
+    sudo /opt/pes/set-up/bin/pes-postboot
   fi
   /opt/pes/bin/pes
 fi
