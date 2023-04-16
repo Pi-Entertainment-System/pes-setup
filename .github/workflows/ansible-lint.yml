@@ -11,7 +11,7 @@ on:
       - 'ansible/roles/**.yml'
 
 jobs:
-  build:
+  lint:
     runs-on: ubuntu-latest
 
     steps:
