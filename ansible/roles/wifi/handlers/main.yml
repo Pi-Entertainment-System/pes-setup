@@ -21,14 +21,14 @@
 #
 
 ---
-- name: "restart dhcpcd"
+- name: Restart dhcpcd
   ansible.builtin.service:
     name: dhcpcd
     state: restarted
-  listen: "restart dhcpcd"
+  listen: restart dhcpcd
 
-- name: "restart wlan0"
+- name: Restart wlan0
   ansible.builtin.service:
     name: wpa_supplicant@wlan0
     state: restarted
-  listen: "restart wlan0"
+  listen: restart wlan0

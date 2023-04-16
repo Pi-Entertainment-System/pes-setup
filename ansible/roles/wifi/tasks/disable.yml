@@ -21,7 +21,7 @@
 #
 
 ---
-- name: "disable wlan0"
+- name: Disable wlan0
   ansible.builtin.service:
     name: wpa_supplicant@wlan0
     state: stopped

@@ -21,27 +21,26 @@
 #
 
 ---
-
-- name: "add pi group"
+- name: Add pi group
   ansible.builtin.group:
     name: pi
     state: present
 
-- name: "add sudoers group"
+- name: Add sudoers group
   ansible.builtin.group:
     name: sudoers
     state: present
 
-- name: "create /etc/sudoers.d/sudoers"
+- name: Create /etc/sudoers.d/sudoers
   ansible.builtin.copy:
     src: sudoers
     dest: /etc/sudoers.d/sudoers
     owner: root
     group: root
-    mode: 0700
+    mode: "0700"
     validate: /usr/sbin/visudo -csf %s
 
-- name: "add pi user"
+- name: Add pi user
   ansible.builtin.user:
     name: pi
     comment: pi
@@ -52,45 +51,45 @@
     home: /home/pi
     state: present
 
-- name: "create /etc/systemd/system/getty@tty1.service.d"
+- name: Create /etc/systemd/system/getty@tty1.service.d
   ansible.builtin.file:
-    path: "/etc/systemd/system/getty@tty1.service.d"
+    path: /etc/systemd/system/getty@tty1.service.d
     state: directory
-    mode: 0755
+    mode: "0755"
     owner: root
     group: root
 
-- name: "enable auto login for pi user"
+- name: Enable auto login for pi user
   ansible.builtin.copy:
     src: autologin.conf
     dest: /etc/systemd/system/getty@tty1.service.d/autologin.conf
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"
 
-- name: "set-up pi .bash_profile"
+- name: Set-up pi .bash_profile
   ansible.builtin.copy:
     src: bash_profile
     dest: /home/pi/.bash_profile
     owner: pi
     group: pi
-    mode: 0600
+    mode: "0600"
 
-- name: "set-up pi .bashrc"
+- name: Set-up pi .bashrc
   ansible.builtin.copy:
     src: bashrc
     dest: /home/pi/.bashrc
     owner: pi
     group: pi
-    mode: 0600
+    mode: "0600"
 
-- name: "remove alarm user"
+- name: Remove alarm user
   ansible.builtin.user:
     name: alarm
     state: absent
     force: true
 
-- name: "remove alarm group"
+- name: Remove alarm group
   ansible.builtin.group:
     name: alarm
     state: absent

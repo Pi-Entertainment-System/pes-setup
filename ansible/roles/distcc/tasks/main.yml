@@ -21,46 +21,45 @@
 #
 
 ---
+- name: Include distcc vars
+  ansible.builtin.include_vars: distcc_vars.yml
 
-- name: "include distcc vars"
-  ansible.builtin.include_vars: "distcc_vars.yml"
-
-- name: "install distcc"
+- name: Install distcc
   community.general.pacman:
     state: present
     name: distcc
 
-- name: "apply distccd config"
+- name: Apply distccd config
   ansible.builtin.copy:
     src: distccd
     dest: /etc/conf.d/distccd
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"
 
-- name: "start distccd"
+- name: Start distccd
   ansible.builtin.service:
     name: distccd
     state: started
     enabled: true
 
-- name: "set distcc hosts in /etc/makepkg.conf"
+- name: Set distcc hosts in /etc/makepkg.conf
   ansible.builtin.lineinfile:
     path: /etc/makepkg.conf
-    regexp: '^DISTCC_HOSTS'
-    line: "DISTCC_HOSTS=\"127.0.0.1 {{ distcc_hosts }}\""
+    regexp: ^DISTCC_HOSTS
+    line: DISTCC_HOSTS="127.0.0.1 {{ distcc_hosts }}"
   when: distcc_hosts is defined
 
-- name: "enable distcc in /etc/makepkg.conf"
+- name: Enable distcc in /etc/makepkg.conf
   ansible.builtin.lineinfile:
     path: /etc/makepkg.conf
-    regexp: '^BUILDENV='
-    line: "BUILDENV=(distcc color !ccache check !sign)"
+    regexp: ^BUILDENV=
+    line: BUILDENV=(distcc color !ccache check !sign)
   when: distcc_hosts is defined
 
-- name: "disable distcc in /etc/makepkg.conf"
+- name: Disable distcc in /etc/makepkg.conf
   ansible.builtin.lineinfile:
     path: /etc/makepkg.conf
-    regexp: '^BUILDENV='
-    line: "BUILDENV=(!distcc color !ccache check !sign)"
+    regexp: ^BUILDENV=
+    line: BUILDENV=(!distcc color !ccache check !sign)
   when: distcc_hosts is undefined

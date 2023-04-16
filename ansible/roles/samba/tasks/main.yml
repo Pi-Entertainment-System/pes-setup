@@ -21,33 +21,32 @@
 #
 
 ---
-
-- name: "install samba"
+- name: Install samba
   community.general.pacman:
     state: present
     name: samba
 
-- name: "remove /etc/samba/smb.conf.default"
+- name: Remove /etc/samba/smb.conf.default
   ansible.builtin.file:
     path: /etc/samba/smb.conf.default
     state: absent
 
-- name: "create /etc/samba/smb.conf"
+- name: Create /etc/samba/smb.conf
   ansible.builtin.copy:
     src: smb.conf
     dest: /etc/samba/smb.conf
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"
   notify: restart smb
 
-- name: "enable smb"
+- name: Enable smb
   ansible.builtin.service:
     name: smb
     state: started
     enabled: true
 
-- name: "enable nmb"
+- name: Enable nmb
   ansible.builtin.service:
     name: nmb
     state: started

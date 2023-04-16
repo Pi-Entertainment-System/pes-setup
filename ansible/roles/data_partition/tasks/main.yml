@@ -21,35 +21,35 @@
 #
 
 ---
-- name: "gather existing partition information"
+- name: Gather existing partition information
   community.general.parted:
     device: /dev/mmcblk0
     unit: MiB
   register: device_info
 
-- name: "create /data mount point"
+- name: Create /data mount point
   ansible.builtin.file:
     path: /data
     state: directory
     mode: "0755"
 
-- name: "create /data FAT32 partition"
+- name: Create /data FAT32 partition
   community.general.parted:
     device: /dev/mmcblk0
     fs_type: fat32
-    part_end: "100%"
+    part_end: 100%
     part_start: "{{ device_info.partitions[-1].end + 1 }}MiB"
     number: 3
     state: present
 
-- name: "format /data"
+- name: Format /data
   community.general.filesystem:
     dev: /dev/mmcblk0p3
     fstype: vfat
-    opts: "-n data"
+    opts: -n data
     state: present
 
-- name: "mount /data"
+- name: Mount /data
   ansible.posix.mount:
     boot: true
     fstype: vfat
@@ -58,13 +58,13 @@
     src: /dev/mmcblk0p3
     state: mounted
 
-- name: "create /data/pes"
+- name: Create /data/pes
   ansible.builtin.file:
     state: directory
     path: /data/pes
     mode: "0755"
 
-- name: "create sym link for pi user"
+- name: Create sym link for pi user
   ansible.builtin.file:
     state: link
     src: /data/pes

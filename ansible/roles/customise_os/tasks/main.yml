@@ -21,91 +21,90 @@
 #
 
 ---
-
-- name: "set hostname"
+- name: Set hostname
   ansible.builtin.hostname:
     name: pes
 
-- name: "apply /boot/config.txt settings"
+- name: Apply /boot/config.txt settings
   ansible.builtin.template:
     src: config.txt.j2
     dest: /boot/config.txt
     owner: root
     group: root
-    mode: 0755
+    mode: "0755"
 
-- name: "apply /boot/cmdline.txt settings"
+- name: Apply /boot/cmdline.txt settings
   ansible.builtin.copy:
     src: cmdline.txt
     dest: /boot/cmdline.txt
     owner: root
     group: root
-    mode: 0755
+    mode: "0755"
 
-- name: "set timezone to Europe/London"
+- name: Set timezone to Europe/London
   community.general.timezone:
     name: Europe/London
 
-- name: "set keyboard layout to UK"
+- name: Set keyboard layout to UK
   ansible.builtin.command:
     cmd: localectl set-keymap --no-convert uk
   register: localectl_output
   changed_when: localectl_output.rc != 0
 
-- name: "disable core files"
+- name: Disable core files
   ansible.builtin.lineinfile:
     path: /etc/systemd/system.conf
-    regexp: '^DumpCore='
-    insertafter: '^#DumpCore='
+    regexp: ^DumpCore=
+    insertafter: ^#DumpCore=
     line: DumpCore=no
 
-- name: "limit journal file to 50MB"
+- name: Limit journal file to 50MB
   ansible.builtin.lineinfile:
     path: /etc/systemd/journald.conf
-    regexp: '^SystemMaxUse='
-    insertafter: '^#SystemMaxUse='
+    regexp: ^SystemMaxUse=
+    insertafter: ^#SystemMaxUse=
     line: SystemMaxUse=50M
 
-- name: "disable DNSSEC - we don't have a RTC"
+- name: Disable DNSSEC - we don't have a RTC
   ansible.builtin.lineinfile:
     path: /etc/systemd/resolved.conf
-    regexp: '^DNSSEC='
-    insertafter: '^#DNSSEC='
+    regexp: ^DNSSEC=
+    insertafter: ^#DNSSEC=
     line: DNSSEC=no
 
-- name: "enable dhcpcd"
+- name: Enable dhcpcd
   ansible.builtin.service:
     name: dhcpcd
     state: started
     enabled: true
 
-- name: "add udev rules for USB control pads"
+- name: Add udev rules for USB control pads
   ansible.builtin.copy:
     src: 99-evdev.rules
     dest: /etc/udev/rules.d/99-evdev.rules
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"
 
-- name: "set-up root .bash_profile"
+- name: Set-up root .bash_profile
   ansible.builtin.copy:
     src: bash_profile
     dest: /root/.bash_profile
     owner: root
     group: root
-    mode: 0600
+    mode: "0600"
 
-- name: "set-up root .bashrc"
+- name: Set-up root .bashrc
   ansible.builtin.copy:
     src: bashrc
     dest: /root/.bashrc
     owner: root
     group: root
-    mode: 0600
+    mode: "0600"
 
-- name: "set-up makepkg.conf"
+- name: Set-up makepkg.conf
   ansible.builtin.lineinfile:
     path: /etc/makepkg.conf
-    regexp: '^MAKEFLAGS='
-    insertafter: '^#MAKEFLAGS='
+    regexp: ^MAKEFLAGS=
+    insertafter: ^#MAKEFLAGS=
     line: MAKEFLAGS="-j {{ ansible_processor_vcpus }}"

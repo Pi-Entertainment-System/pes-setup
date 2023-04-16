@@ -21,14 +21,14 @@
 #
 
 ---
-- name: "install dev packages"
+- name: Install dev packages
   community.general.pacman:
     name: "{{ item }}"
     state: present
   with_items: "{{ dev_packages }}"
   when: dev_mode
 
-- name: install common packages
+- name: Install common packages
   community.general.pacman:
     name: "{{ item }}"
     state: present
@@ -81,20 +81,20 @@
     - xa
     - zip
 
-- name: install PES packages
+- name: Install PES packages
   community.general.pacman:
     name: "{{ item }}"
     state: present
   with_items: "{{ pes_packages }}"
   when: not dev_mode
 
-- name: check Raspberry Pi model
+- name: Check Raspberry Pi model
   ansible.builtin.command:
     cmd: cat /sys/firmware/devicetree/base/model
   register: model_rslt
   changed_when: model_rslt.rc != 0
 
-- name: install rpi-eeprom for newer Raspberry Pis
+- name: Install rpi-eeprom for newer Raspberry Pis
   ansible.builtin.package:
     name: rpi-eeprom
     state: present

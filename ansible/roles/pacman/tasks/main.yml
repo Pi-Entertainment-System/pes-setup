@@ -21,20 +21,20 @@
 #
 
 ---
-
-- name: "add PES repository: {{ pes_repo_url }}"
+- name: "Add PES repository: {{ pes_repo_url }}"
   ansible.builtin.template:
     src: pacman.conf.j2
     dest: /etc/pacman.conf
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"
 
-- name: "check for PES pacman database"
+- name: Check for PES pacman database
   ansible.builtin.stat:
     path: /var/lib/pacman/sync/pes.db
   register: db_rslt
 
-- name: "add PES database to pacman"
+- name: Add PES database to pacman
   ansible.builtin.command: pacman -Sy
+  changed_when: not db_rslt.stat.exists
   when: not db_rslt.stat.exists

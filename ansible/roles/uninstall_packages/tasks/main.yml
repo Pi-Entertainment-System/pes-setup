@@ -21,7 +21,7 @@
 #
 
 ---
-- name: uninstall dev packages
+- name: Uninstall dev packages
   community.general.pacman:
     name: "{{ item }}"
     state: absent

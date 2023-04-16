@@ -21,11 +21,10 @@
 #
 
 ---
-
-- name: "create /etc/motd"
+- name: Create /etc/motd
   ansible.builtin.template:
     src: motd.j2
     dest: /etc/motd
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"

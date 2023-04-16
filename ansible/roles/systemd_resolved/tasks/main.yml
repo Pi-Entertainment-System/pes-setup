@@ -21,35 +21,35 @@
 #
 
 ---
-
-- name: disable systemd-resolved
+- name: Disable systemd-resolved
   ansible.builtin.service:
     name: systemd-resolved
     enabled: false
     state: stopped
 
-- name: check status of /etc/resolv.conf
+- name: Check status of /etc/resolv.conf
   ansible.builtin.stat:
     path: /etc/resolv.conf
     follow: false
   register: resolv_result
 
-- name: remove /etc/resolv.conf sym link
+- name: Remove /etc/resolv.conf sym link
   ansible.builtin.file:
     state: absent
     path: /etc/resolv.conf
   when: resolv_result.stat.exists and resolv_result.stat.islnk
 
-- name: get resolvconf output
-  ansible.builtin.command: "resolvconf -l"
+- name: Get resolvconf output
+  ansible.builtin.command: resolvconf -l
   register: resolvconf_result
+  changed_when: not resolv_result.stat.exists or (resolv_result.stat.exists and resolv_result.stat.islnk)
   when: not resolv_result.stat.exists or (resolv_result.stat.exists and resolv_result.stat.islnk)
 
-- name: create /etc/resolv.conf
+- name: Create /etc/resolv.conf
   ansible.builtin.copy:
     dest: /etc/resolv.conf
     content: "{{ resolvconf_result.stdout }}\n"
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"
   when: not resolv_result.stat.exists or (resolv_result.stat.exists and resolv_result.stat.islnk)

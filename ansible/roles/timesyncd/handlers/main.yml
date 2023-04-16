@@ -21,8 +21,8 @@
 #
 
 ---
-- name: restart systemd-timesyncd
+- name: Restart systemd-timesyncd
   ansible.builtin.service:
     name: systemd-timesyncd
     state: restarted
-  listen: "restart systemd-timesyncd"
+  listen: restart systemd-timesyncd

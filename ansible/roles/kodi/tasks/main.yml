@@ -20,14 +20,13 @@
 #    along with PES.  If not, see <http://www.gnu.org/licenses/>.
 #
 ---
-
-- name: create Kodi dirs for pi user
+- name: Create Kodi dirs for pi user
   ansible.builtin.file:
     state: directory
     path: "{{ item }}"
     owner: pi
     group: pi
-    mode: 0755
+    mode: "0755"
   with_items:
     - /home/pi/.kodi
     - /home/pi/.kodi/userdata
@@ -38,30 +37,30 @@
     - /data/pes/kodi/Pictures
     - /data/pes/kodi/TV
 
-- name: check if ~pi/.kodi/userdata/sources.xml exists
+- name: Check if ~pi/.kodi/userdata/sources.xml exists
   ansible.builtin.stat:
     path: /home/pi/.kodi/userdata/sources.xml
   register: sources_stat_rslt
 
-- name: create ~pi/.kodi/userdata/sources.xml
+- name: Create ~pi/.kodi/userdata/sources.xml
   ansible.builtin.copy:
     src: sources.xml
     dest: /home/pi/.kodi/userdata/sources.xml
     owner: pi
     group: pi
-    mode: 0644
+    mode: "0644"
   when: not sources_stat_rslt.stat.exists
 
-- name: check if ~/pi/.kodi/userdata/peripheral_data/cec_CEC_Adapter.xml exists
+- name: Check if ~/pi/.kodi/userdata/peripheral_data/cec_CEC_Adapter.xml exists
   ansible.builtin.stat:
     path: /home/pi/.kodi/userdata/peripheral_data/cec_CEC_Adapter.xml
   register: cec_rslt
 
-- name: create ~/pi/.kodi/userdata/peripheral_data/cec_CEC_Adapter.xml
+- name: Create ~/pi/.kodi/userdata/peripheral_data/cec_CEC_Adapter.xml
   ansible.builtin.copy:
     src: cec_CEC_Adapter.xml
     dest: /home/pi/.kodi/userdata/peripheral_data/cec_CEC_Adapter.xml
     owner: pi
     group: pi
-    mode: 0644
+    mode: "0644"
   when: not cec_rslt.stat.exists

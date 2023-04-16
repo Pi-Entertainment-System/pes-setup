@@ -21,10 +21,10 @@
 #
 
 ---
-- name: "include enable wifi"
+- name: Include enable wifi
   ansible.builtin.include_tasks: enable.yml
   when: wifi_enable
 
-- name: "include disable wifi"
+- name: Include disable wifi
   ansible.builtin.include_tasks: disable.yml
   when: not wifi_enable
