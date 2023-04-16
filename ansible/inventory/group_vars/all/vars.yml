@@ -28,6 +28,7 @@ ansible_python_interpreter: auto_silent
 pes_repo_url: https://pes.mundayweb.com/repo
 
 dev_packages:
+  - ansible-lint
   - autoconf
   - automake
   - bison
@@ -40,9 +41,24 @@ dev_packages:
   - kodi-rpi-dev
   - make
   - patch
+  - python-ansible-compat
+  - python-black
+  - python-bracex
+  - python-enrich
+  - python-filelock
+  - python-jsonschema
+  - python-mypy_extensions
+  - python-pathspec
   - python-pip
+  - python-pyaml
+  - python-pyrsistent
+  - python-ruamel-yaml
+  - python-ruamel.yaml.clib
+  - python-subprocess-tee
+  - python-wcmatch
   - python-sphinx
   - pkgconf
+  - yamllint
 
 pes_packages:
   - pes-gui
