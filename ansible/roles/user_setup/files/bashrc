@@ -10,6 +10,10 @@
 alias ls='ls --color=auto'
 alias ll='ls -l'
 
+if [ $TERM != "xterm" ]; then
+  setterm -blank 0
+fi
+
 if [ ! -n "$SSH_CONNECTION" ] && [ ! -n "$DESKTOP_SESSION" ]; then
   if ! mount | grep -q '/data' || [ ! -d ~/.kodi ]; then
     sudo ansible-playbook /opt/pes/set-up/postboot-playbook.yml
