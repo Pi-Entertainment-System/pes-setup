@@ -22,7 +22,7 @@ Insert the SD card into your Linux system and proceed as follows, substituting t
 
 ### Raspberry Pi 2/3
 
-```
+```bash
 mkdir root boot
 wget http://os.archlinuxarm.org/os/ArchLinuxARM-rpi-2-latest.tar.gz
 mount /dev/sdf1 boot
@@ -34,7 +34,7 @@ mv root/boot/* boot/
 
 ### Raspberry Pi 4
 
-```
+```bash
 mkdir root boot
 wget http://os.archlinuxarm.org/os/ArchLinuxARM-rpi-armv7-latest.tar.gz
 mount /dev/sdf1 boot
@@ -56,13 +56,13 @@ Now add your SSH key(s) to the root account in the image:
 
 If you don't have any SSH keys set-up on your Linux host, make them now else skip this command:
 
-```
+```bash
 ssh-keygen -t ed25519
 ```
 
 Create `authorized_keys` file on Raspberry Pi file system:
 
-```
+```bash
 cd root/root
 mkdir .ssh
 chmod 0700 .ssh
@@ -73,7 +73,7 @@ cd ../..
 
 Finally:
 
-```
+```bash
 umount boot
 umount root
 ```
@@ -84,23 +84,38 @@ Now you can boot your Raspberry Pi.
 
 Once your Raspberry Pi has booted, `ssh` in as root and run the following commands:
 
-```
+```bash
 pacman-key --init
 pacman-key --populate archlinuxarm
 pacman -Syu
 reboot
 ```
 
+## Import PES GPG keys
+
 If you plan to use PES packages that have been signed, then import the key. For example, to import the GPG key used to sign official PES packages by Neil Munday:
 
-```
+```bash
 pacman-key --recv-keys 48310703B4D7CD631162265274F5569D8E61676F
 pacman-key --lsign 48310703B4D7CD631162265274F5569D8E61676F
 ```
 
+## Set locale
+
+Ansible requires a UTF8 locale to be set.
+
+Edit `/etc/locale.gen` and uncomment `en_GB.UTF-8 UTF-8`.
+
+Now run:
+
+```bash
+locale-gen
+localectl set-locale en_GB.UTF-8
+```
+
 ## Check out this Repository
 
-```
+```bash
 pacman -S ansible git
 git clone https://github.com/Pi-Entertainment-System/pes-setup
 cd pes-setup
@@ -108,7 +123,7 @@ cd pes-setup
 
 At this point you can enable WiFi if needed e.g.:
 
-```
+```bash
 ansible-playbook -e 'wifi_psk=WIFI_PASSWORD wifi_ssid=WIFI_NETWORK' ansible/enable-wifi.yml
 ```
 
@@ -116,7 +131,7 @@ Set *WIFI_PASSWORD* and *WIFI_NETWORK* as necessary.
 
 Now set-up Arch Linux for PES development:
 
-```
+```bash
 ansible-playbook -i ansible/inventory ansible/dev-playbook.yml
 ```
 
@@ -126,7 +141,7 @@ After a successful run all of the packages required to build the PES packages wi
 
 If you are using a Raspberry Pi 4, then the `rpi-eeprom` will have been installed. You can check if an update is available for your Raspberry Pi:
 
-```
+```bash
 rpi-eeprom-update
 ```
 
@@ -148,7 +163,7 @@ BOOTLOADER: update available
 
 If an update is available (as shown in the above example) then you can install it like so:
 
-```
+```bash
 rpi-eeprom-update -a
 reboot
 ```
@@ -165,7 +180,7 @@ Note: an official PES packages repository will be publicly hosted at the time of
 
 PES on the Raspberry Pi is supplied as a Raspberry Pi image file that can be written to a SD card. When creating a PES set-up several development packages are installed by the Ansible `dev-playbook`. These are not needed by a PES installation once all packages have been built. The Ansible `setup-playbook` is intended to prepare a Raspbery Pi PES installation for image creation. It will for example uninstall development packages, delete unnecessary files, set-up the PES pacman repository etc.
 
-```
+```bash
 ansible-playbook -i ansible/inventory -e pes_repo_url=URL_TO_PES_REPO ansible/setup-playbook.yml
 ```
 
