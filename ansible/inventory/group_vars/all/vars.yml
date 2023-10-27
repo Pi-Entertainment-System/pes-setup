@@ -44,6 +44,7 @@ dev_packages:
   - python-ansible-compat
   - python-black
   - python-bracex
+  - python-deprecated
   - python-enrich
   - python-filelock
   - python-jsonschema
@@ -51,6 +52,8 @@ dev_packages:
   - python-pathspec
   - python-pip
   - python-pyaml
+  - python-pygithub
+  - python-pyjwt
   - python-pyrsistent
   - python-ruamel-yaml
   - python-ruamel.yaml.clib
